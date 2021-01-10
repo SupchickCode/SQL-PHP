@@ -1,9 +1,35 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-// Изменить авторизацию на php (не lavarel) так, чтобы:
-// 1. Работа с базой данных была через механизм PDO, а не mysqli (будет хорошо,а
-// если дополнительно использовать подготовленные запросы).
-// 2. При успешной авторизации результат сохранялся в сессию.
-// 3. Клиенту возвращался результат в JSON (status:success/error) и происходила его
-// обработка на клиенте (например, выводило сообщение об ошибке или успехе),
-// можно использовать jquery.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST TASK</title>
+</head>
+
+<body>
+    <?php
+    
+    session_start();
+
+    if ($_SESSION['response']) {
+        $response =  json_decode($_SESSION['response'],true);
+
+        # REMOVE SESSION AFTER GOT RESPONSE 
+        unset($_SESSION['response']);
+
+        if ($response["status"] == 'success') {
+            echo 'Авторизация успешна!';
+        } elseif($response["status"] == 'error') {
+            echo 'Ошибка авторизации';
+        }
+    } else { ?>
+        <form action="login.php" method="POST">
+            <input type="text" name="login"><br>
+            <input type="password" name="password"><br>
+            <button type="submit">Login</button>
+        </form>
+    <?php } ?>
+</body>
+
+</html>

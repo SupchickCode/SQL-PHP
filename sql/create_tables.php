@@ -17,7 +17,7 @@ $tabel_climber = "CREATE TABLE IF NOT EXISTS climber (
                         FOREIGN KEY (team_id) REFERENCES team_climbers (id)) 
                         ENGINE=InnoDB CHARACTER SET utf8;";
 
-$tabel_mountains = "CREATE TABLE IF NOT EXISTS mountain (
+$tabel_mountain = "CREATE TABLE IF NOT EXISTS mountain (
                         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                         name VARCHAR(255) NOT NULL,
                         high INT NOT NULL,
@@ -37,7 +37,7 @@ $tabel_climbing = "CREATE TABLE IF NOT EXISTS climbing (
 
 // Create all tables 
 
-$conn->exec($tabel_climber);
 $conn->exec($tabel_team_climbers);
-$conn->exec($tabel_mountains);
+$conn->exec($tabel_climber);
+$conn->exec($tabel_mountain);
 $conn->exec($tabel_climbing);
